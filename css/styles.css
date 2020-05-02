@@ -1,0 +1,69 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.landing {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.background-wrapper {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    transform: translate3d(0, 0, 0);
+}
+
+.background-wrapper:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(#e8a, 1), rgba(#def, 0), rgba(white, .5));
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+}
+
+.wave {
+    opacity: .4;
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    background: #0af;
+    width: 100%;
+    height: auto;
+    padding-top: 100%;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 5000ms infinite linear;
+}
+
+.wave.-three {
+    animation: drift 7000ms infinite linear;
+}
+
+.wave.-two {
+    animation: drift 10000ms infinite linear;
+    opacity: .3;
+    background: rgb(75, 195, 255);
+}
+
+@keyframes drift {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
+}
