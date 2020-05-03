@@ -5,14 +5,11 @@ const goToRoute = async () => {
     const content = document.getElementById('page_content') || null;
     const request = parseRequestURL();
     const parsedURL = '/' + request.resource;
+    const view = routes[parsedURL]() || routes['home']();
 
-    const page = routes[parsedURL] || routes['home'];
-
-    content.innerHTML = await page.render();
-    await page.mounted && page.mounted();
+    content.innerHTML = await view.render;
+    await view.mounted && view.mounted();
 }
 
 window.addEventListener('hashchange', goToRoute);
 window.addEventListener('load', goToRoute);
-
-

@@ -1,6 +1,6 @@
-import Home from '../views/home.js';
-import Projects from '../views/projects.js';
-import Contact from '../views/contact.js';
+import Home from './home.js';
+import Projects from './projects.js';
+import Contact from './contact.js';
 
 export const routes = {
     '/': Home,
