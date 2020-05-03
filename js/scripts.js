@@ -1,29 +1,18 @@
-const themeColors = {
-    home: '#0af',
-    projects: 'red',
-    contact: 'green'
-};
+import { routes } from '../views/index.js';
+import { parseRequestURL } from '../utils/parseUrl.js';
 
-const buttons = document.querySelectorAll('.navigation-list > li > a');
+const goToRoute = async () => {
+    const content = document.getElementById('page_content') || null;
+    const request = parseRequestURL();
+    const parsedURL = '/' + request.resource;
 
-[...buttons].map(button => { button.addEventListener('click', handleNavigationButtonClick) });
+    const page = routes[parsedURL] || routes['home'];
 
-window.onload = (event) => {
-    startUp();
-};
-
-function removeHash(value) {
-    return value.replace('#', '');
+    content.innerHTML = await page.render();
+    await page.mounted && page.mounted();
 }
 
-function startUp() {
-    goToView(removeHash(window.location.hash) || 'home');
-}
+window.addEventListener('hashchange', goToRoute);
+window.addEventListener('load', goToRoute);
 
-function handleNavigationButtonClick(event) {
-    goToView(removeHash(event.target.hash) || 'home');
-}
 
-function goToView(view) {
-    document.documentElement.style.setProperty('--theme-color', themeColors[view] || themeColors.home);
-}
