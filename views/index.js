@@ -2,22 +2,24 @@ import Home from './home/home.js';
 import Projects from './projects/projects.js';
 import Contact from './contact/contact.js';
 
+export const viewsPath = './views';
+
 export const routes = {
-    '/': {
+    default: {
         component: Home,
-        markup: './views/home/home.html',
+        filePath: 'home',
     },
-    '/home': { 
+    'home': { 
         component: Home,
-        markup: './views/home/home.html',
+        filePath: 'home',
     },
-    '/projects': {
+    'projects': {
         component: Projects,
-        markup: './views/projects/projects.html',
+        filePath: 'projects',
     },
-    '/contact': {
+    'contact': {
         component: Contact,
-        markup: './views/contact/contact.html',
+        filePath: 'contact',
     },
 };
 

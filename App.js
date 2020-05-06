@@ -1,37 +1,32 @@
-import { routes } from '../views/index.js';
-import { parseRequestURL } from '../utils/parseUrl.js';
+import { routes, viewsPath } from './views/index.js';
+import { parseRequestURL } from './utils/parseUrl.js';
 
 class App {
     constructor() {
-        this.contentElement = document.getElementById('page_content');
+        this.contentElement = document.getElementById('app');
     }
 
     goToRoute = () => {
         if(!this.contentElement) {
-            console.log('Page Content not found');
+            console.log('App not found');
             return;
         } 
     
-        const request = parseRequestURL();
-        const parsedURL = '/' + request.resource;
-        const view = routes[parsedURL] ? new routes[parsedURL].component() : new routes['/home'].component();
+        const request = parseRequestURL().resource;
+        const requestedRoute = routes[request] || routes.default;
+        const component = new requestedRoute.component();
+        const filePath = requestedRoute.filePath;
 
-        this.renderView({component: view, markup: routes[parsedURL].markup});
-    
-        // mutationObserver.observe(view, {
-        //     attributes: true,
-        //     characterData: true,
-        //     childList: true,
-        //     subtree: true,
-        //     attributeOldValue: true,
-        //     characterDataOldValue: true
-        // });
-        
+        this.renderView({component, filePath});
     }
     
     renderView = async (view) => {
-        const templatePath = view.markup;
-        const template = await this.getTemplate(templatePath);
+        const basePath = viewsPath + '/';
+        const componentPath = view.filePath + '/';
+        const markupPath =  basePath + componentPath + view.filePath + '.html';
+        const template = await this.getTemplate(markupPath);
+
+        this.contentElement.innerHTML = '';
         this.contentElement.appendChild(template);
         await view.component.mounted && view.component.mounted();
     }
@@ -42,13 +37,7 @@ class App {
         const html =  new DOMParser().parseFromString(txt, 'text/html');
 
         return html.querySelector('section');
-    }  
-    
-    // mutationObserver = new MutationObserver(function(mutations) {
-    //     mutations.forEach(function(mutation) {
-    //       console.log(mutation);
-    //     });
-    // });
+    }
 }
 
 const app = new App();
