@@ -28,6 +28,7 @@ class App {
 
         this.contentElement.innerHTML = '';
         this.contentElement.appendChild(template);
+        view.component.setViewReference(template);
         await view.component.mounted && view.component.mounted();
     }
 
