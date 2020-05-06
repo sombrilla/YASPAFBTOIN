@@ -1,4 +1,4 @@
-import { routes, viewsPath } from './views/index.js';
+import { routes } from './views/index.js';
 import { parseRequestURL } from './utils/parseUrl.js';
 
 class App {
@@ -14,30 +14,16 @@ class App {
     
         const request = parseRequestURL().resource;
         const requestedRoute = routes[request] || routes.default;
-        const component = new requestedRoute.component();
-        const filePath = requestedRoute.filePath;
-
-        this.renderView({component, filePath});
+        const page = requestedRoute;
+        this.renderPage(page);
     }
     
-    renderView = async (view) => {
-        const basePath = viewsPath + '/';
-        const componentPath = view.filePath + '/';
-        const markupPath =  basePath + componentPath + view.filePath + '.html';
-        const template = await this.getTemplate(markupPath);
+    renderPage = async (page) => {
+        const pageComponent = new page.component();
+        await pageComponent.start(page);
 
         this.contentElement.innerHTML = '';
-        this.contentElement.appendChild(template);
-        view.component.setViewReference(template);
-        await view.component.mounted && view.component.mounted();
-    }
-
-    getTemplate = async (templatePath) => {
-        const response = await fetch(templatePath);
-        const txt = await response.text();
-        const html =  new DOMParser().parseFromString(txt, 'text/html');
-
-        return html.querySelector('section');
+        this.contentElement.appendChild(pageComponent.template);
     }
 }
 
