@@ -1,5 +1,5 @@
-import Page from '../page.js';
-import { themeColors } from '../index.js';
+import Page from '../../../handlers/page.js';
+import { themeColors } from '../../index.js';
 
 class Projects extends Page {
     mounted() {

@@ -1,4 +1,4 @@
-import { routes } from './views/index.js';
+import { routes } from './components/index.js';
 import { parseRequestURL } from './utils/parseUrl.js';
 
 class App {
@@ -15,6 +15,7 @@ class App {
         const request = parseRequestURL().resource;
         const requestedRoute = routes[request] || routes.default;
         const page = requestedRoute;
+        
         this.renderPage(page);
     }
     

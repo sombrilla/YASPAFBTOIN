@@ -1,7 +1,10 @@
-class Page {
+import { componentsPath } from '../components/index.js';
+
+class Component {
     constructor() {
         this.componentName = undefined;
         this.template = undefined;
+        this.basePath = componentsPath;
     }
 
     async start (component) {
@@ -24,8 +27,7 @@ class Page {
     }
 
     getFilePath(name, extension) {
-        const scriptUrlSlugs = import.meta.url.split('/');
-        const basePath = './' + scriptUrlSlugs[scriptUrlSlugs.length - 2] + '/';
+        const basePath = this.basePath + '/';
         const componentPath = name + '/';
         const fullPath =  basePath + componentPath + name + (extension || '');
 
@@ -33,4 +35,4 @@ class Page {
     }
 };
 
-export default Page;
+export default Component;
