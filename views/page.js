@@ -1,22 +1,18 @@
-import { viewsPath } from './index.js';
-
 class Page {
     constructor() {
+        this.componentName = undefined;
         this.template = undefined;
     }
 
-    async start (page) {
-        await this.setTemplate(page.filePath);
+    async start (component) {
+        await this.setComponentName(component.name);
+        await this.setTemplate(component.name);
 
         this.mounted && this.mounted();
     }
 
-    getFilePath(filePath, extension) {
-        const basePath = viewsPath + '/';
-        const componentPath = filePath + '/';
-        const fullPath =  basePath + componentPath + filePath + (extension || '');
-
-        return fullPath;
+    async setComponentName(name) {
+        this.componentName = name;
     }
 
     async setTemplate(templatePath) {
@@ -24,7 +20,16 @@ class Page {
         const template = await response.text();
         const html =  new DOMParser().parseFromString(template, 'text/html');
 
-        this.template = html.querySelector('section');
+        this.template = html.querySelector('body');
+    }
+
+    getFilePath(name, extension) {
+        const scriptUrlSlugs = import.meta.url.split('/');
+        const basePath = './' + scriptUrlSlugs[scriptUrlSlugs.length - 2] + '/';
+        const componentPath = name + '/';
+        const fullPath =  basePath + componentPath + name + (extension || '');
+
+        return fullPath;
     }
 };
 

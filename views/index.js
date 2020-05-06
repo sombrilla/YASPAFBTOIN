@@ -4,23 +4,17 @@ import Contact from './contact/contact.js';
 
 export const viewsPath = './views';
 
+export const components = {
+    home: { name: 'home', component: Home },
+    projects: { name: 'projects', component: Projects },
+    contact: { name: 'contact', component: Contact },
+}
+
 export const routes = {
-    default: {
-        component: Home,
-        filePath: 'home',
-    },
-    'home': { 
-        component: Home,
-        filePath: 'home',
-    },
-    'projects': {
-        component: Projects,
-        filePath: 'projects',
-    },
-    'contact': {
-        component: Contact,
-        filePath: 'contact',
-    },
+    default: components.home,
+    'home': components.home,
+    'projects': components.projects,
+    'contact': components.contact,
 };
 
 export const themeColors = {
