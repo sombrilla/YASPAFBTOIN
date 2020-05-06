@@ -14,9 +14,9 @@ class App {
     
         const request = parseRequestURL();
         const parsedURL = '/' + request.resource;
-        const view = routes[parsedURL] ? new routes[parsedURL]() : new routes['/home']();
+        const view = routes[parsedURL] ? new routes[parsedURL].component() : new routes['/home'].component();
 
-        this.renderView(view);
+        this.renderView({component: view, markup: routes[parsedURL].markup});
     
         // mutationObserver.observe(view, {
         //     attributes: true,
@@ -30,9 +30,19 @@ class App {
     }
     
     renderView = async (view) => {
-        this.contentElement.innerHTML = await view.render();
-        await view.mounted && view.mounted();
+        const templatePath = view.markup;
+        const template = await this.getTemplate(templatePath);
+        this.contentElement.appendChild(template);
+        await view.component.mounted && view.component.mounted();
     }
+
+    getTemplate = async (templatePath) => {
+        const response = await fetch(templatePath);
+        const txt = await response.text();
+        const html =  new DOMParser().parseFromString(txt, 'text/html');
+
+        return html.querySelector('section');
+    }  
     
     // mutationObserver = new MutationObserver(function(mutations) {
     //     mutations.forEach(function(mutation) {

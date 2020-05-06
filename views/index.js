@@ -1,12 +1,24 @@
-import Home from './home.js';
-import Projects from './projects.js';
-import Contact from './contact.js';
+import Home from './home/home.js';
+import Projects from './projects/projects.js';
+import Contact from './contact/contact.js';
 
 export const routes = {
-    '/': Home,
-    '/home': Home,
-    '/projects': Projects,
-    '/contact': Contact
+    '/': {
+        component: Home,
+        markup: './views/home/home.html',
+    },
+    '/home': { 
+        component: Home,
+        markup: './views/home/home.html',
+    },
+    '/projects': {
+        component: Projects,
+        markup: './views/projects/projects.html',
+    },
+    '/contact': {
+        component: Contact,
+        markup: './views/contact/contact.html',
+    },
 };
 
 export const themeColors = {
