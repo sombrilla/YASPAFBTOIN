@@ -1,4 +1,4 @@
-export const pagesPath = './components/pages';
+export const pagesPath = './components/Pages';
 
 export const routes = {
     default: 'home',
