@@ -31,7 +31,7 @@ class App {
     }
 
     renderComponent = async (component, parent = undefined) => {
-        const componentName = !parent ? component.attributes['component'].value : components[component].name;
+        const componentName = (!parent ? component.attributes['component'].value : components[component].name).toLowerCase();
         const tempComponent = !parent ? component : parent;
 
         if(componentName && components[componentName]) {
