@@ -9,7 +9,7 @@ class App {
         this.startUp();
     }
 
-    startUp = async () => {
+    startUp = () => {
         if(!appContainer){
             console.log('App not found');
             return;
@@ -20,24 +20,25 @@ class App {
        this.getCustomElements();
     }
 
-    getCustomElements = async (parent = undefined) => {
+    getCustomElements = (parent = undefined) => {
         const customComponents = parent ? parent.getElementsByTagName('app-component') : appContainer.getElementsByTagName('app-component');
 
         if(!parent) {
-            Array.prototype.map.call(customComponents, async component => await this.renderComponent(component));
+            Array.prototype.map.call(customComponents, component => this.renderComponent(component));
         }
 
         return customComponents;
     }
 
     renderComponent = async (component, parent = undefined) => {
-        const componentName = typeof component !== "string" ? component.attributes['component'].value : components[component].name;
+        const componentName = !parent ? component.attributes['component'].value : components[component].name;
         const tempComponent = !parent ? component : parent;
 
         if(componentName && components[componentName]) {
             const newComponent = new components[componentName].component();
             await newComponent.start(components[componentName]);
             tempComponent.appendChild(newComponent.template);
+            !parent && tempComponent.parentElement.replaceChild(newComponent.template, tempComponent);
         } else {
             console.log('Component: \'' + componentName + '\' could not be loaded, is it registered?');
         }
