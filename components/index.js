@@ -7,11 +7,11 @@ import { Background } from './Background/Background.js';
 export const componentsPath = './components';
 
 export const components = {
-    home: { name: 'home', component: Home },
-    projects: { name: 'projects', component: Projects },
-    contact: { name: 'contact', component: Contact },
-    navigation: { name: 'navigation', component: Navigation },
-    background: { name: 'background', component: Background },
+    home: { name: 'Home', component: Home },
+    projects: { name: 'Projects', component: Projects },
+    contact: { name: 'Contact', component: Contact },
+    navigation: { name: 'Navigation', component: Navigation },
+    background: { name: 'Background', component: Background },
 }
 
 export const themeColors = {
