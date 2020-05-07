@@ -24,7 +24,6 @@ class App {
         const customComponents = parent ? parent.getElementsByTagName('app-component') : appContainer.getElementsByTagName('app-component');
 
         if(!parent) {
-            console.log(customComponents)
             Array.prototype.map.call(customComponents, async component => await this.renderComponent(component));
         }
 

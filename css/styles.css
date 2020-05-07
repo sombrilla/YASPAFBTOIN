@@ -15,7 +15,7 @@ a:visited {
     color: currentColor;
 }
 
-.landing {
+#app {
     margin: 0;
     padding: 0;
     width: 100%;
