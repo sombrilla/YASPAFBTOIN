@@ -1,3 +1,4 @@
+import { app } from '../App.js';
 import { componentsPath } from '../components/index.js';
 
 class Component {
@@ -23,7 +24,18 @@ class Component {
         const template = await response.text();
         const html =  new DOMParser().parseFromString(template, 'text/html');
 
-        this.template = html.querySelector('body');
+        const childComponents = html.getElementsByTagName('app-component');
+
+        this.template = html.querySelector('body > *');
+        Array.prototype.map.call(childComponents, async component => await this.setChildComponentsTemplate(component));
+    }
+
+    async setChildComponentsTemplate(component) {
+        if (component.attributes['component'].value !== this.componentName) {
+            component && app.renderComponent(component);
+        } else {
+            console.log('Tried to mount component:\'' +  this.componentName +  '\' inside the same component.');
+        }
     }
 
     getFilePath(name, extension) {

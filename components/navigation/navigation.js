@@ -1,7 +1,10 @@
-import Component from './index.js';
-import { themeColors } from '../../index.js';
+import Component from '../../handlers/component.js';
 
-class Navigation extends Page {
+class Navigation extends Component {
+    constructor() {
+        super();
+    }
+    
     mounted() {}
 };
 

@@ -1,9 +1,10 @@
-import { routes } from './components/index.js';
+import { routes, components } from './components/index.js';
 import { parseRequestURL } from './utils/parseUrl.js';
 
 class App {
     constructor() {
         this.contentElement = document.getElementById('app');
+        this.currentPage = undefined;
     }
 
     goToRoute = () => {
@@ -15,7 +16,7 @@ class App {
         const request = parseRequestURL().resource;
         const requestedRoute = routes[request] || routes.default;
         const page = requestedRoute;
-        
+
         this.renderPage(page);
     }
     
@@ -26,9 +27,24 @@ class App {
         this.contentElement.innerHTML = '';
         this.contentElement.appendChild(pageComponent.template);
     }
+
+    renderComponent = async (component) => {
+        const componentName = component.attributes['component'].value;
+        if(componentName && components[componentName]) {
+            const newComponent = new components[componentName].component();
+            await newComponent.start(components[componentName]);
+            component.appendChild(newComponent.template);
+
+        } else {
+            console.log('Component: \'' + componentName + '\' could not be loaded, is it registered?');
+        }
+
+    }
 }
 
-const app = new App();
+export const app = new App();
+
+customElements.define('app-component', HTMLElement, { extends: 'div' });
 
 window.addEventListener('hashchange', app.goToRoute);
 window.addEventListener('load', app.goToRoute);
