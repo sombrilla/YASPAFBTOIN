@@ -3,7 +3,6 @@ import Projects from './pages/projects/projects.js';
 import Contact from './pages/contact/contact.js';
 import Navigation from './navigation/navigation.js';
 
-export const pagesPath = './components/pages';
 export const componentsPath = './components';
 
 export const components = {
@@ -12,13 +11,6 @@ export const components = {
     contact: { name: 'contact', component: Contact },
     navigation: { name: 'navigation', component: Navigation },
 }
-
-export const routes = {
-    default: components.home,
-    'home': components.home,
-    'projects': components.projects,
-    'contact': components.contact,
-};
 
 export const themeColors = {
     home: '#0af',

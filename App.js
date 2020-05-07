@@ -1,40 +1,44 @@
-import { routes, components } from './components/index.js';
-import { parseRequestURL } from './utils/parseUrl.js';
+import { components } from './components/index.js';
+import Router from './router/router.js';
+
+const appContainer = document.getElementById('app');
 
 class App {
     constructor() {
-        this.contentElement = document.getElementById('app');
-        this.currentPage = undefined;
+        this.router = new Router(appContainer);
+        this.startUp();
     }
 
-    goToRoute = () => {
-        if(!this.contentElement) {
+    startUp = async () => {
+        if(!appContainer){
             console.log('App not found');
             return;
-        } 
-    
-        const request = parseRequestURL().resource;
-        const requestedRoute = routes[request] || routes.default;
-        const page = requestedRoute;
+        }
 
-        this.renderPage(page);
-    }
-    
-    renderPage = async (page) => {
-        const pageComponent = new page.component();
-        await pageComponent.start(page);
+       customElements.define('app-component', HTMLElement, { extends: 'div' });
 
-        this.contentElement.innerHTML = '';
-        this.contentElement.appendChild(pageComponent.template);
+       this.getCustomElements();
     }
 
-    renderComponent = async (component) => {
-        const componentName = component.attributes['component'].value;
+    getCustomElements = async (parent = undefined) => {
+        const customComponents = parent ? parent.getElementsByTagName('app-component') : appContainer.getElementsByTagName('app-component');
+
+        if(!parent) {
+            console.log(customComponents)
+            Array.prototype.map.call(customComponents, async component => await this.renderComponent(component));
+        }
+
+        return customComponents;
+    }
+
+    renderComponent = async (component, parent = undefined) => {
+        const componentName = typeof component !== "string" ? component.attributes['component'].value : components[component].name;
+        const tempComponent = !parent ? component : parent;
+
         if(componentName && components[componentName]) {
             const newComponent = new components[componentName].component();
             await newComponent.start(components[componentName]);
-            component.appendChild(newComponent.template);
-
+            tempComponent.appendChild(newComponent.template);
         } else {
             console.log('Component: \'' + componentName + '\' could not be loaded, is it registered?');
         }
@@ -43,10 +47,5 @@ class App {
 }
 
 export const app = new App();
-
-customElements.define('app-component', HTMLElement, { extends: 'div' });
-
-window.addEventListener('hashchange', app.goToRoute);
-window.addEventListener('load', app.goToRoute);
 
 

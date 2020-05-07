@@ -24,7 +24,7 @@ class Component {
         const template = await response.text();
         const html =  new DOMParser().parseFromString(template, 'text/html');
 
-        const childComponents = html.getElementsByTagName('app-component');
+        const childComponents = app.getCustomElements(html);
 
         this.template = html.querySelector('body > *');
         Array.prototype.map.call(childComponents, async component => await this.setChildComponentsTemplate(component));
