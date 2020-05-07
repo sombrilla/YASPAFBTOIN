@@ -1,7 +1,7 @@
-import Page from '../../../handlers/page.js';
+import { Page } from '../../../lib/Page.js';
 import { themeColors } from '../../index.js';
 
-class Home extends Page {
+export class Home extends Page {
     constructor(props) {
         super(props);
         this.props = props;
@@ -11,5 +11,3 @@ class Home extends Page {
         document.documentElement.style.setProperty('--theme-color', themeColors.home);
     }
 };
-
-export default Home;

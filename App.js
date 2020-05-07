@@ -1,5 +1,5 @@
 import { components } from './components/index.js';
-import Router from './router/router.js';
+import { Router } from './router/Router.js';
 
 const appContainer = document.getElementById('app');
 

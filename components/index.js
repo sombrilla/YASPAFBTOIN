@@ -1,8 +1,8 @@
-import Home from './pages/home/home.js';
-import Projects from './pages/projects/projects.js';
-import Contact from './pages/contact/contact.js';
-import Navigation from './navigation/navigation.js';
-import Background from './background/background.js';
+import { Home } from './Pages/Home/Home.js';
+import { Projects } from './Pages/Projects/Projects.js';
+import { Contact } from './Pages/Contact/Contact.js';
+import { Navigation } from './Navigation/Navigation.js';
+import { Background } from './Background/Background.js';
 
 export const componentsPath = './components';
 

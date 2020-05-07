@@ -1,7 +1,7 @@
 import { app } from '../App.js';
 import { routes } from './routerConfig.js';
 
-class Router {
+export class Router {
     constructor(container) {
         this.appContainer = container;
         this.container = undefined;
@@ -45,5 +45,3 @@ class Router {
         return request;
     }
 }
-
-export default Router;

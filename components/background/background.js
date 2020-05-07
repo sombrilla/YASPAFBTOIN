@@ -1,11 +1,9 @@
-import Component from '../../handlers/component.js';
+import { Component } from '../../lib/Component.js';
 
-class Background extends Component {
+export class Background extends Component {
     constructor() {
         super();
     }
     
     mounted() {}
 };
-
-export default Background;
