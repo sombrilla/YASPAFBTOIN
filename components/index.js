@@ -10,8 +10,8 @@ export const components = {
     home: { name: 'home', component: Home },
     projects: { name: 'projects', component: Projects },
     contact: { name: 'contact', component: Contact },
-    navigation: { name: 'navigation', component: Navigation },
-    background: { name: 'background', component: Background },
+    navigation: { name: 'navigation', component: Navigation, loadCSS: true },
+    background: { name: 'background', component: Background, loadCSS: true },
 }
 
 export const themeColors = {
