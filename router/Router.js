@@ -1,4 +1,4 @@
-import { app } from '../App.js';
+import { app } from '../index.js';
 import { routes } from './routerConfig.js';
 
 export class Router {
@@ -27,7 +27,7 @@ export class Router {
         const page = requestedRoute;
 
         this.container.innerHTML = '';
-        app.renderComponent(page, this.container);
+        app.renderComponent(page, this.container, false);
     }
 
     parseRequestURL = () => {
