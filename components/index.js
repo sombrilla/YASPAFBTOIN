@@ -4,6 +4,7 @@ import { Contact } from './pages/contact/contact.js';
 import { Navigation } from './navigation/navigation.js';
 import { Background } from './background/background.js';
 import { NavigationLink } from './navigationLink/navigationLink.js';
+import { Loader } from './loader/loader.js';
 
 export const componentsPath = './components';
 
@@ -13,7 +14,8 @@ export const components = {
     contact: { name: 'contact', component: Contact },
     navigation: { name: 'navigation', component: Navigation, loadCSS: true },
     background: { name: 'background', component: Background, loadCSS: true },
-    navigationLink: { name: 'navigationLink', component: NavigationLink, loadCSS: true },
+    navigationLink: { name: 'navigationLink', component: NavigationLink, loadCSS: true},
+    loader: { name: 'loader', component: Loader},
 }
 
 export const themeColors = {
