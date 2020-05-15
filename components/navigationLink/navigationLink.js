@@ -7,12 +7,13 @@ export class NavigationLink extends Component {
     }
 
     mounted () {
-        const links = this.template.getElementsByClassName('navigation-link');
-        setTimeout(async () => {
-            this.props.copy = 'asd';
-        }, 1000)
+        const link = this.template.getElementsByClassName('navigation-link')[0];
 
-        Array.prototype.map.call(links, link => link.addEventListener('click', this.clickLink));
+        setTimeout(async () => {
+            this.setProps({copy: 'asd', route: 'home'});
+        }, 1000);
+
+        link.addEventListener('click', this.clickLink);
     }
 
     clickLink(e) {
