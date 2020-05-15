@@ -1,4 +1,4 @@
-import { Component } from '../../../lib/Component.js';
+import { Component } from '../../lib/Component.js';
 
 export class Loader extends Component {
     constructor(props) {
