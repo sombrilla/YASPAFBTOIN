@@ -1,5 +1,4 @@
-import { Page } from '../../../lib/Page.js';
-import { themeColors } from '../../index.js';
+import { Page } from '../../../lib/router/Page.js';
 
 export class Home extends Page {
     constructor(props) {
@@ -7,7 +6,5 @@ export class Home extends Page {
         this.props = props;
     };
 
-    mounted() {
-        document.documentElement.style.setProperty('--theme-color', themeColors.home);
-    }
+    mounted() {}
 };
