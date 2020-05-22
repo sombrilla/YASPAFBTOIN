@@ -1,4 +1,4 @@
-import { Component } from '../../lib/Component.js';
+import { Component } from '../../lib/core/Component.js';
 
 export class AnimatedTitle extends Component {
     constructor() {
