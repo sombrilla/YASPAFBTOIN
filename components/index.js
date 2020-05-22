@@ -5,6 +5,7 @@ import { Navigation } from './navigation/navigation.js';
 import { Background } from './background/background.js';
 import { NavigationLink } from './navigationLink/navigationLink.js';
 import { Loader } from './loader/loader.js';
+import { AnimatedTitle } from './animatedTitle/animatedTitle.js';
 
 export const componentsPath = './components';
 
@@ -16,6 +17,7 @@ export const components = {
     background: { name: 'background', component: Background, loadCSS: true },
     navigationLink: { name: 'navigationLink', component: NavigationLink, loadCSS: true},
     loader: { name: 'loader', component: Loader},
+    animatedTitle: { name: 'animatedTitle', component: AnimatedTitle, loadCSS: true},
 }
 
 export const themeColors = {
