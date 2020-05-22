@@ -1,4 +1,4 @@
-import { App } from './lib/App.js';
+import { App } from './lib/core/App.js';
 import { Router } from './lib/router/Router.js';
 
 export const app = new App();
